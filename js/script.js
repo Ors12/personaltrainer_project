@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     [".stats-band .col-6", "zoom"],
     [".quote-mark, .testimonial-section blockquote, .quote-author", "up"],
     [".contact-detail", "up"],
+    [".g-item", "zoom"],
     [".contact-form", "right"]
   ];
   const revealEls = [];
@@ -102,6 +103,49 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
     revealEls.forEach(el => io.observe(el));
   }
+
+  /* ===== Galéria: hibás kép kezelése + nagyító ===== */
+  const items = [...document.querySelectorAll(".g-item")];
+  items.forEach(fig => {
+    const img = fig.querySelector("img");
+    const fail = () => fig.classList.add("no-img");
+    img.addEventListener("error", fail);
+    if (img.complete && img.naturalWidth === 0) fail();
+  });
+  const lb = document.getElementById("lightbox");
+  const lbImg = lb.querySelector("img");
+  let idx = 0;
+  const visible = () => items.filter(f => !f.classList.contains("no-img"));
+  const show = i => {
+    const list = visible(); if (!list.length) return;
+    idx = (i + list.length) % list.length;
+    const fig = list[idx];
+    lbImg.src = fig.dataset.full; lbImg.alt = fig.querySelector("img").alt;
+  };
+  const open = fig => {
+    show(visible().indexOf(fig));
+    lb.hidden = false; document.body.style.overflow = "hidden";
+    requestAnimationFrame(() => lb.classList.add("open"));
+    lb.querySelector(".lb-close").focus();
+  };
+  const close = () => {
+    lb.classList.remove("open"); document.body.style.overflow = "";
+    setTimeout(() => { lb.hidden = true; }, 300);
+  };
+  items.forEach(fig => {
+    fig.addEventListener("click", () => !fig.classList.contains("no-img") && open(fig));
+    fig.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(fig); } });
+  });
+  lb.querySelector(".lb-close").addEventListener("click", close);
+  lb.querySelector(".lb-prev").addEventListener("click", e => { e.stopPropagation(); show(idx - 1); });
+  lb.querySelector(".lb-next").addEventListener("click", e => { e.stopPropagation(); show(idx + 1); });
+  lb.addEventListener("click", e => { if (e.target === lb) close(); });
+  document.addEventListener("keydown", e => {
+    if (lb.hidden) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") show(idx - 1);
+    if (e.key === "ArrowRight") show(idx + 1);
+  });
 
   const form = document.getElementById("contactForm");
   form.addEventListener("submit", (event) => {

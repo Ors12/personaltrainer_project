@@ -56,3 +56,4 @@ footer .brand-logo .logo-text strong{font-size:1.15rem}
 .scroll-cue span{display:inline-block;animation:cueBounce 1.8s ease-in-out infinite}
 @keyframes cueBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 @media (prefers-reduced-motion:reduce){.navbar,.scroll-cue span{transition:none;animation:none}}
+.contact-detail .contact-sub{color:#a9b0a6;font-size:.9rem;margin-top:3px}

@@ -57,3 +57,9 @@ footer .brand-logo .logo-text strong{font-size:1.15rem}
 @keyframes cueBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 @media (prefers-reduced-motion:reduce){.navbar,.scroll-cue span{transition:none;animation:none}}
 .contact-detail .contact-sub{color:#a9b0a6;font-size:.9rem;margin-top:3px}
+.social-link{display:inline-flex;align-items:center;gap:12px;align-self:flex-start}
+.social-icon{display:grid;place-items:center;width:40px;height:40px;border:1.5px solid var(--lime);border-radius:50%;transition:background .3s,transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .3s}
+.social-icon svg{width:20px;height:20px;fill:var(--lime);transition:fill .3s}
+.social-link:hover .social-icon{background:var(--lime);transform:rotate(-12deg) scale(1.1);box-shadow:0 0 16px rgba(197,244,103,.55)}
+.social-link:hover .social-icon svg{fill:#111}
+.social-link:hover{color:var(--lime)!important}

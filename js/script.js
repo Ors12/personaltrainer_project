@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("year").textContent = new Date().getFullYear();
 
   const nav = document.querySelector(".navbar-collapse");
-  document.querySelectorAll(".navbar-nav .nav-link, .navbar-nav .btn").forEach(link => {
+  document.querySelectorAll(".navbar-nav .nav-link, .navbar-nav .btn, .nav-sublink").forEach(link => {
     link.addEventListener("click", () => {
       if (nav.classList.contains("show")) {
         bootstrap.Collapse.getOrCreateInstance(nav).hide();
@@ -11,6 +11,19 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
+
+  /* ===== Rólam lenyíló menü ===== */
+  const drop = document.querySelector(".nav-drop");
+  const dropBtn = drop.querySelector(".nav-drop-toggle");
+  const setDrop = open => {
+    drop.classList.toggle("open", open);
+    dropBtn.setAttribute("aria-expanded", open);
+  };
+  dropBtn.addEventListener("click", e => { e.stopPropagation(); setDrop(!drop.classList.contains("open")); });
+  drop.querySelectorAll(".nav-sublink").forEach(a => a.addEventListener("click", () => setDrop(false)));
+  document.addEventListener("click", e => { if (!drop.contains(e.target)) setDrop(false); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") setDrop(false); });
+
   /* ===== Fix menü: görgetéskor kompakt mód, haladásjelző, aktív menüpont ===== */
   const navbar = document.querySelector(".navbar");
   const progress = document.createElement("div");
@@ -18,7 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
   navbar.appendChild(progress);
 
   const sections = [...document.querySelectorAll("header[id], section[id]")];
-  const navLinks = [...document.querySelectorAll(".navbar-nav .nav-link")];
+  const navLinks = [...document.querySelectorAll(".navbar-nav .nav-link, .nav-sublink")];
+  const dropParent = document.querySelector('.nav-drop-head .nav-link');
+  const dropIds = ["about", "services", "results", "gallery"];
   const hero = document.querySelector(".hero");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -32,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let current = "";
     sections.forEach(sec => { if (y >= sec.offsetTop - 120) current = sec.id; });
     navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + current));
+    dropParent.classList.toggle("active", dropIds.includes(current));
 
     if (!reduceMotion && y < window.innerHeight * 1.2) {
       hero.style.backgroundPositionY = `calc(50% + ${y * 0.35}px)`;

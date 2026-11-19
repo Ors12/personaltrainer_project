@@ -37,10 +37,18 @@
       </button>
       <div class="collapse navbar-collapse" id="mainNav">
         <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
-          <li class="nav-item"><a class="nav-link" href="#about">Rólam</a></li>
-          <li class="nav-item"><a class="nav-link" href="#services">Edzések</a></li>
-          <li class="nav-item"><a class="nav-link" href="#results">Eredmények</a></li>
-          <li class="nav-item"><a class="nav-link" href="#gallery">Galéria</a></li>
+          <li class="nav-item"><a class="nav-link" href="#home">Kezdőlap</a></li>
+          <li class="nav-item nav-drop">
+            <div class="nav-drop-head">
+              <a class="nav-link" href="#about">Rólam</a>
+              <button class="nav-drop-toggle" type="button" aria-expanded="false" aria-controls="aboutMenu" aria-label="Rólam almenü megnyitása"><svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5"/></svg></button>
+            </div>
+            <ul class="nav-drop-menu" id="aboutMenu">
+              <li><a class="nav-sublink" href="#services"><span>01</span>Edzések</a></li>
+              <li><a class="nav-sublink" href="#results"><span>02</span>Eredmények</a></li>
+              <li><a class="nav-sublink" href="#gallery"><span>03</span>Galéria</a></li>
+            </ul>
+          </li>
           <li class="nav-item"><a class="nav-link" href="#contact">Kapcsolat</a></li>
           <li class="nav-item"><a class="btn btn-accent ms-lg-2" href="#contact">Kezdjük el</a></li>
         </ul>

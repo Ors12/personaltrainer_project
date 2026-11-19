@@ -97,3 +97,29 @@ footer .brand-logo .logo-text strong{font-size:1.15rem}
 .lb-next{right:22px;top:50%;transform:translateY(-50%)}
 @media (max-width:575.98px){.lb-prev,.lb-next{top:auto;bottom:22px;transform:none}}
 .lightbox[hidden]{display:none}
+
+/* ===== Rólam lenyíló menü ===== */
+.nav-drop{position:relative}
+.nav-drop-head{display:flex;align-items:center}
+.nav-drop-toggle{background:none;border:0;padding:6px 4px;margin-left:-4px;display:grid;place-items:center;cursor:pointer}
+.nav-drop-toggle svg{width:11px;height:8px;fill:none;stroke:#d7dbd4;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .35s cubic-bezier(.34,1.56,.64,1),stroke .25s}
+.nav-drop:hover .nav-drop-toggle svg,.nav-drop.open .nav-drop-toggle svg{stroke:var(--lime);transform:rotate(180deg)}
+.nav-drop-menu{list-style:none;margin:0;padding:10px;min-width:220px;background:rgba(14,18,15,.98);border:1px solid #2c342b;border-top:2px solid var(--lime);box-shadow:0 22px 50px rgba(0,0,0,.45)}
+.nav-sublink{display:flex;align-items:center;gap:14px;padding:11px 14px;color:#d7dbd4;text-decoration:none;font-size:.9rem;transition:background .25s,color .25s,padding-left .3s}
+.nav-sublink span{font:600 .65rem "DM Sans",sans-serif;letter-spacing:1.5px;color:var(--lime);opacity:.7}
+.nav-sublink:hover,.nav-sublink.active{background:rgba(197,244,103,.08);color:var(--lime);padding-left:20px}
+.nav-sublink.active span{opacity:1}
+@media (min-width:992px){
+  .nav-drop-menu{position:absolute;top:calc(100% + 14px);left:50%;opacity:0;visibility:hidden;transform:translate(-50%,10px);transition:opacity .3s,transform .35s cubic-bezier(.22,1,.36,1),visibility .3s}
+  .nav-drop-menu::before{content:"";position:absolute;left:0;right:0;top:-18px;height:18px}
+  .nav-drop:hover .nav-drop-menu,.nav-drop.open .nav-drop-menu,.nav-drop:focus-within .nav-drop-menu{opacity:1;visibility:visible;transform:translate(-50%,0)}
+  .nav-drop-menu li{opacity:0;transform:translateX(-8px);transition:opacity .3s,transform .35s}
+  .nav-drop:hover .nav-drop-menu li,.nav-drop.open .nav-drop-menu li,.nav-drop:focus-within .nav-drop-menu li{opacity:1;transform:none}
+  .nav-drop-menu li:nth-child(2){transition-delay:.05s}.nav-drop-menu li:nth-child(3){transition-delay:.1s}
+}
+@media (max-width:991.98px){
+  .nav-drop-head{justify-content:space-between}
+  .nav-drop-toggle{padding:10px 12px}
+  .nav-drop-menu{max-height:0;margin:0;padding:0 0 0 14px;background:none;border:0;border-left:2px solid var(--lime);box-shadow:none;overflow:hidden;transition:max-height .4s ease,padding .35s,margin .35s}
+  .nav-drop.open .nav-drop-menu{max-height:220px;padding:4px 0 4px 14px;margin:2px 0 8px}
+}

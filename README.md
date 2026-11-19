@@ -1,4 +1,4 @@
-# Személyi edző portfólió – Varga Ádám
+# Személyi edző portfólió – Szilasi Boldizsár
 
 Bemutató weboldal egy személyi edző számára. Saját fejlesztés (ORSBUILDS), tiszta HTML/CSS/JavaScript, keretrendszer és build lépés nélkül.
 

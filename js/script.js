@@ -21,6 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
       `Név: ${data.get("name")}\nEmail: ${data.get("email")}\nCél: ${data.get("goal")}\n\nÜzenet:\n${data.get("message") || "Nincs megadva."}`
     );
     document.getElementById("formStatus").textContent = "Megnyitjuk az email alkalmazásodat az előkészített üzenettel.";
-    window.location.href = `mailto:hello@adamtraining.hu?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:hello@boldizsartraining.hu?subject=${subject}&body=${body}`;
   });
 });
